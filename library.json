@@ -1,0 +1,20 @@
+{
+  "name": "STIXXXWTGUI",
+  "keywords": "STIXXXWT, GUI, STIXXXWTGUI, display, stone, hmi, screen, sti",
+  "description": "GUI library for STIXXXWT displays",
+  "url": "",
+  "include": "STIXXXWTGUI.h",
+  "authors":
+  [
+	{
+      "name": "Frederik Gelder"
+    }
+  ],
+  "frameworks": "arduino"
+  "dependencies":
+    [
+        {
+            "name": "STIXXXWT"
+        }
+    ]
+}

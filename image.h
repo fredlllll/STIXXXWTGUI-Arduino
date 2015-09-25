@@ -25,16 +25,13 @@ class image : public GUIElement{
 public:
     image(){}
     
-    void init(uint16_t pictureID, point sourceTopLeft, rectangle area, STIXXXWTGUI *gui)//:
-    //GUIElement(true,area,gui),
-    //sourceTopLeft(sourceTopLeft),
-    //region(pictureID,rectangle(sourceTopLeft,point(sourceTopLeft.x+area.width(),sourceTopLeft.y+area.height())),gui)
-    {
-    visible = true;
+    void init(uint16_t pictureID, point sourceTopLeft, rectangle area, STIXXXWTGUI *gui){
+        visible = true;
         this->area = area;
         this->gui = gui;
         this->sourceTopLeft = sourceTopLeft;
         region = spriteSheetRegion(pictureID,rectangle(sourceTopLeft,point(sourceTopLeft.x+area.width(),sourceTopLeft.y+area.height())),gui);
+        gui->addElement(this);
     }
 
     point sourceTopLeft;

@@ -27,11 +27,11 @@ template<typename T> class simplevector {
     ~simplevector() { free(data); }; // Destructor
     simplevector(size_t startCapacity) : _size(0), capacity(startCapacity), data(0) {
         allocCap();
-    };
+    }
     simplevector(simplevector const &other) : _size(other._size), capacity(other.capacity), data(0) { // Copy constuctor
         data = (T*)malloc(capacity*sizeof(T));
         memcpy(data, other.data, size*sizeof(T));
-    };
+    }
     simplevector &operator=(simplevector const &other) { // Needed for memory management
         free(data);
         _size = other._size;
@@ -39,19 +39,27 @@ template<typename T> class simplevector {
         data = (T*)malloc(capacity*sizeof(T));
         memcpy(data, other.data, _size*sizeof(T));
         return *this;
-    };
+    }
     void push_back(T const &x) { // Adds new value. If needed, allocates more space
         if (capacity == _size){
             resize();
         }
         data[_size++] = x;
-    };
+    }
     void erase(size_t position){
         memcpy(data+position,data+position+1,((_size--)-position-1)*sizeof(T));
-    };
-    size_t size() const { return _size; }; // Size getter
-    T const &operator[](size_t i) const { return data[i]; }; // Const getter
-    T &operator[](size_t i) { return data[i]; }; // Changeable getter
+    }
+    void erase(T elem){
+        for(int i =0; i< _size;i++){
+            if(data[i]== elem){
+                erase(i);
+                return;
+            }
+        }
+    }
+    size_t size() const { return _size; } // Size getter
+    T const &operator[](size_t i) const { return data[i]; } // Const getter
+    T &operator[](size_t i) { return data[i]; } // Changeable getter
   private:
     size_t _size; // Stores no. of actually stored objects
     size_t capacity; // Stores allocated capacity
@@ -60,7 +68,7 @@ template<typename T> class simplevector {
     void resize() {// Allocates double the old space
         capacity = capacity ? capacity*2 : 1;
         allocCap();
-    };
+    }
     void allocCap(){
         T *newdata = (T *)malloc(capacity*sizeof(T));
         memcpy(newdata, data, _size * sizeof(T));

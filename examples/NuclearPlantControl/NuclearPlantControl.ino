@@ -1,5 +1,3 @@
-
-
 /**********************************************************************************************
  * Arduino STIXXXWTGUI Library - Version 1.0.0
  * by Frederik Gelder <frederik.gelder@freenet.de>
@@ -28,18 +26,24 @@ STIXXXWTGUI gui;
 image imgtest;
 label lbltest;
 
-wchar_t testtext[] = L"Ola estas loco";
+char testtext[] = "Lächeln bitte"; //should be utf8
 
 void setup(){
-    display.connect(&Serial,19200);
+    display.connect(&Serial1,115200);
+    delay(200);
     display.sendHandshake(); //get infos
     display.clearScreen();
     gui.begin(&display);
     
-    imgtest.init(2,point(20,20),rectangle(0,0,20,20),&gui);
-    lbltest.init(rectangle(point(100,100),point()),testtext,sizeof(testtext)/2,&gui);
+    imgtest.init(2,point(100,100),rectangle(50,50,20,20),&gui);
+    lbltest.init(rectangle(point(100,100),point()),testtext,&gui);
+    lbltest.encoding = STIXXXWT::UTF16Unicode;
+    lbltest.font = STIXXXWT::font6_12;
+    lbltest.size = STIXXXWT::size48_96;
+    lbltest.foreground = color16(255,255,0);
+    lbltest.background = color16();
     
-    display->clear();
+    display.clearScreen();
     gui.draw();
 }
 

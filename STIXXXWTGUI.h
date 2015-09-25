@@ -46,6 +46,8 @@ class STIXXXWTGUI
     void loop();
     void draw();
     STIXXXWT *display(){return _display;}
+    void addElement(GUIElement* e);
+    void removeElement(GUIElement* e);
   private:
     STIXXXWT *_display;
     simplevector<GUIElement*> elements;

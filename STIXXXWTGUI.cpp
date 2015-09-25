@@ -73,3 +73,11 @@ void STIXXXWTGUI::draw(){
         elements[i]->draw();
     }
 }
+
+void STIXXXWTGUI::addElement(GUIElement* e){
+    elements.push_back(e);
+}
+
+void STIXXXWTGUI::removeElement(GUIElement* e){
+    elements.erase(e);
+}

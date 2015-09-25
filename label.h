@@ -33,12 +33,12 @@ public:
         font = STIXXXWT::font6_12;
     }
     
-    void init(rectangle area, wchar_t *text, uint16_t textlen, STIXXXWTGUI *gui){
+    void init(rectangle area, char *text, STIXXXWTGUI *gui){
         visible = true;
         this->area = area;
         this->gui = gui;
         this->text = text;
-        this->textlen = textlen;
+        gui->addElement(this);
     }
 
     point sourceTopLeft;
@@ -47,16 +47,14 @@ public:
     void handleFingerHold(point p){}
     void loop(){}
     void draw(){
-        gui->display()->displayText(area.topLeft, font, useForegroundColor, useBackgroundColor, horizontalDisplay, recoverBackground, encoding, size, foreground, background, text, textlen);
+        gui->display()->displayText(area.topLeft, font, useForegroundColor, useBackgroundColor, horizontalDisplay, recoverBackground, encoding, size, foreground, background, text);
     }
     
-    void setText(wchar_t *text,uint16_t textlen){
+    void setText(char *text){
         this->text = text;
-        this->textlen = textlen;
     }
 private:
-    wchar_t *text;
-    uint16_t textlen;
+    char *text;
 };
 
 #endif
